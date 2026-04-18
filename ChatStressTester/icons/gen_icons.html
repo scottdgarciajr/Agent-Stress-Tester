@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!-- Run this page in a browser, then right-click each canvas and "Save image as" icon16/48/128.png -->
+<html><body>
+<script>
+[16, 48, 128].forEach(size => {
+  const c = document.createElement('canvas');
+  c.width = c.height = size;
+  const ctx = c.getContext('2d');
+  // Background
+  ctx.fillStyle = '#1e1b4b';
+  ctx.beginPath();
+  ctx.roundRect(0, 0, size, size, size * 0.18);
+  ctx.fill();
+  // Flask emoji approximation
+  ctx.fillStyle = '#a5b4fc';
+  ctx.font = `bold ${size * 0.55}px serif`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('🧪', size / 2, size / 2);
+  document.body.appendChild(c);
+});
+</script>
+</body></html>

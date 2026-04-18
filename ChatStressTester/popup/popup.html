@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ChatStressTester</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <h1>🧪 ChatStressTester</h1>
+  <div class="header-right">
+    <div class="ollama-status">
+      <span class="status-dot checking" id="ollamaDot"></span>
+      <span id="ollamaLabel">Checking…</span>
+    </div>
+    <button class="gear-btn" id="gearBtn" title="Settings">⚙️</button>
+  </div>
+</div>
+
+<!-- Settings panel -->
+<div class="settings-panel" id="settingsPanel">
+  <label for="ollamaUrl">Ollama Base URL</label>
+  <input type="text" id="ollamaUrl" value="http://localhost:11434" placeholder="http://localhost:11434">
+</div>
+
+<div class="content">
+
+  <!-- Section 1: Suites -->
+  <div class="section-title">Test Suites</div>
+  <div class="suite-controls">
+    <button class="link-btn" id="selectAll">Select All</button>
+    <button class="link-btn" id="deselectAll">Deselect All</button>
+  </div>
+  <div id="suiteList">
+    <!-- Populated by popup.js -->
+  </div>
+
+  <!-- Section 2: Options -->
+  <div class="section-title">Options</div>
+  <div class="option-row">
+    <span class="option-label">Use Ollama to generate extra prompts</span>
+    <label class="toggle">
+      <input type="checkbox" id="useOllamaGen" checked>
+      <span class="toggle-slider"></span>
+    </label>
+  </div>
+  <div class="option-row">
+    <span class="option-label">Use Ollama to classify responses</span>
+    <label class="toggle">
+      <input type="checkbox" id="useOllamaClassify" checked>
+      <span class="toggle-slider"></span>
+    </label>
+  </div>
+  <div class="option-row">
+    <span class="option-label">Delay between prompts (ms)</span>
+    <input type="number" class="num-input" id="delayMs" value="2000" min="500" max="30000">
+  </div>
+  <div class="option-row">
+    <span class="option-label">Response timeout (ms)</span>
+    <input type="number" class="num-input" id="timeoutMs" value="15000" min="3000" max="120000">
+  </div>
+  <div class="option-row">
+    <span class="option-label">Ollama model</span>
+    <input type="text" class="text-input" id="ollamaModel" value="llama3">
+  </div>
+
+  <!-- Section 3: Run Controls -->
+  <div class="section-title">Run</div>
+  <button class="btn-primary" id="startBtn">▶ Start Stress Test</button>
+  <button class="btn-stop" id="stopBtn">⏹ Stop Test</button>
+
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-text" id="progressText">Initializing…</div>
+  </div>
+
+  <div class="error-banner" id="errorBanner"></div>
+
+  <!-- Section 4: Results -->
+  <div class="results-summary" id="resultsSummary">
+    <div class="summary-line" id="summaryLine"></div>
+    <button class="btn-download visible" id="downloadHtml">📄 Download HTML Report</button>
+    <button class="btn-download visible" id="downloadJson">📦 Download JSON Report</button>
+  </div>
+
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>
