@@ -15,6 +15,7 @@
       <span class="status-dot checking" id="ollamaDot"></span>
       <span id="ollamaLabel">Checking…</span>
     </div>
+    <button class="gear-btn" id="openReport" title="Open Live Report" style="font-size:14px">📊</button>
     <button class="gear-btn" id="gearBtn" title="Settings">⚙️</button>
   </div>
 </div>
@@ -66,7 +67,64 @@
     <input type="text" class="text-input" id="ollamaModel" value="llama3">
   </div>
 
-  <!-- Section 3: Run Controls -->
+  <!-- Section 3: AI Conversation Simulation -->
+  <div class="section-title">AI Conversation Simulation</div>
+  <div class="option-row">
+    <span class="option-label">Enable conversation simulation</span>
+    <label class="toggle">
+      <input type="checkbox" id="enableConvSim">
+      <span class="toggle-slider"></span>
+    </label>
+  </div>
+  <div id="convSimOptions" style="display:none">
+    <div class="conv-sublabel">Personas (Ollama roleplays as these users)</div>
+    <div id="personaList"><!-- Populated by popup.js --></div>
+    <div class="option-row" style="margin-top:8px">
+      <span class="option-label">Scenario</span>
+      <select class="select-input" id="convScenario"><!-- Populated by popup.js --></select>
+    </div>
+    <div class="option-row">
+      <span class="option-label">Turns per conversation</span>
+      <input type="number" class="num-input" id="turnsPerConv" value="4" min="2" max="10">
+    </div>
+    <div class="option-row">
+      <span class="option-label">Conversations per persona</span>
+      <input type="number" class="num-input" id="numConversations" value="1" min="1" max="3">
+    </div>
+  </div>
+
+  <!-- Section 3b: Decision Tree Alignment Test -->
+  <div class="section-title">Decision Tree Alignment Test</div>
+  <div class="option-row">
+    <span class="option-label">Enable decision tree test</span>
+    <label class="toggle">
+      <input type="checkbox" id="enableDT">
+      <span class="toggle-slider"></span>
+    </label>
+  </div>
+  <div id="dtOptions" style="display:none">
+    <textarea id="dtMermaid" class="dt-textarea" placeholder="Paste your Mermaid flowchart here (flowchart TD …)"></textarea>
+    <div class="option-row">
+      <span class="option-label">Scenarios to generate</span>
+      <input type="number" class="num-input" id="dtNumScenarios" value="4" min="1" max="10">
+    </div>
+    <div class="option-row">
+      <span class="option-label">Turns per scenario</span>
+      <input type="number" class="num-input" id="dtTurnsPerScenario" value="6" min="2" max="12">
+    </div>
+    <div class="option-row" style="margin-top:6px">
+      <span class="option-label"><strong>Full tree test</strong> — every leaf path</span>
+      <label class="toggle">
+        <input type="checkbox" id="enableFullTree">
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+    <div id="fullTreeInfo" class="full-tree-info" style="display:none">
+      Paths will be extracted automatically from the diagram — no Ollama needed for parsing.
+    </div>
+  </div>
+
+  <!-- Section 4: Run Controls -->
   <div class="section-title">Run</div>
   <button class="btn-primary" id="startBtn">▶ Start Stress Test</button>
   <button class="btn-stop" id="stopBtn">⏹ Stop Test</button>
@@ -78,7 +136,15 @@
     <div class="progress-text" id="progressText">Initializing…</div>
   </div>
 
+  <button class="btn-download btn-live-report" id="downloadLive">📥 Download Live Report</button>
+
   <div class="error-banner" id="errorBanner"></div>
+
+  <!-- Live Results Feed -->
+  <div id="liveFeed" class="live-feed">
+    <div class="live-feed-header">Live Results</div>
+    <div id="liveFeedList" class="live-feed-list"></div>
+  </div>
 
   <!-- Section 4: Results -->
   <div class="results-summary" id="resultsSummary">

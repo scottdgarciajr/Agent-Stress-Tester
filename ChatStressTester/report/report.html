@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ChatStressTester — Live Report</title>
+  <script src="../lib/reporter.js"></script>
+  <script src="report.js" defer></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: system-ui, -apple-system, sans-serif; background: #f9fafb; }
+    .bar {
+      background: #1e1b4b; color: #fff; padding: 10px 16px;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 13px; position: sticky; top: 0; z-index: 10;
+    }
+    .bar h1 { font-size: 15px; font-weight: 700; }
+    .bar-right { display: flex; align-items: center; gap: 14px; }
+    .status-text { color: #c7d2fe; font-size: 12px; }
+    .refresh-btn {
+      background: #312e81; border: 1px solid #4338ca; color: #c7d2fe;
+      border-radius: 6px; padding: 4px 10px; font-size: 12px; cursor: pointer;
+    }
+    .refresh-btn:hover { background: #4338ca; color: #fff; }
+    iframe { width: 100%; height: calc(100vh - 42px); border: none; background: #fff; }
+    .empty {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      height: calc(100vh - 42px); color: #9ca3af; gap: 10px;
+    }
+    .empty p { font-size: 15px; }
+    .empty small { font-size: 13px; color: #d1d5db; }
+    .dot {
+      display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+      background: #f59e0b; margin-right: 6px; animation: pulse 1.5s infinite;
+    }
+    .dot.idle { background: #6b7280; animation: none; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+  </style>
+</head>
+<body>
+  <div class="bar">
+    <h1>🧪 ChatStressTester — Live Report</h1>
+    <div class="bar-right">
+      <span class="status-text" id="statusText">
+        <span class="dot idle" id="dot"></span>Waiting for test data…
+      </span>
+      <button class="refresh-btn" id="refreshBtn">↻ Refresh Now</button>
+    </div>
+  </div>
+  <div id="emptyMsg" class="empty">
+    <p>No test data yet.</p>
+    <small>Start a stress test in the extension popup — results will appear here automatically.</small>
+  </div>
+  <iframe id="reportFrame" style="display:none"></iframe>
+</body>
+</html>
